@@ -1,0 +1,31 @@
+给定一个字符串，逐个翻转字符串中的每个单词。
+输入：“I am a student”
+输出：“student a am I”
+代码：
+class Solution { 
+  public: 
+      string ReverseSentence(string str) 
+      { 
+          reverse(str.begin(),str.end());          //先翻转整个句子，再翻转整个单词
+          
+           int i=0;         //i表示字符串的开始
+           int j=0;  		   //j表示字符串的结束
+          
+          
+          //这里只关心字符串的尾部，尾部若是空格就翻转，这里面尾部作为一个标志位，作为对每个单独的字符串的翻转
+           
+          for(j=0;j<str.size();j++)        
+          { 
+             
+              if(str[j]==' ')                        //当遇到空格的时候意思就是遇到的前面的从i开始到j的下标是一个单词[i,j]
+              { 
+                  reverse(str.begin()+i,str.begin()+j); 
+                  i=j+1;              //在修改头部的指针
+              } 
+          } 
+          
+          
+          reverse(str.begin()+i,str.begin()+j);  //再将反装过的单词翻转即可"Wonderful"-"lufrednoW"-"Wonderful"
+          return str; 
+      } 
+  };
