@@ -1,0 +1,32 @@
+给出一个字符串s和一个词典，判断字符串s是否可以被空格切分成一个或多个出现在字典中的单词。
+样例
+给出
+s = "lintcode"
+dict = ["lint","code"]
+返回 true 因为"lintcode"可以被空格切分成"lint code"
+
+思路：直观的想法是直接遍历string，有匹配的单词就做一次切分，再去比配剩下的字符串。
+代码：
+class Solution {
+public:
+    /**
+     * @param s: A string s
+     * @param dict: A dictionary of words dict
+     */
+    bool wordBreak(string s, unordered_set<string> &dict) {
+        if(s=="")return true;
+        if(dict.empty())return false;
+        int begin= 0;
+        int i;
+        for(i = 0;i<s.size();i++)
+        {
+            string val = s.substr(begin,i-begin+1);      //substr函数
+            if(dict.find(val)!=dict.end())               //find函数表示查找成功，开始继续的查找下去
+            begin= i+1;                                  //修改匹配的起始位置，开始下一次匹配
+        }
+        if(begin== s.size()) return true;
+        return false;
+    }
+};
+
+
