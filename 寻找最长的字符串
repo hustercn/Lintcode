@@ -1,0 +1,72 @@
+给一个词典，找出其中所有最长的单词。
+
+样例
+在词典
+{
+  "dog",
+  "google",
+  "facebook",
+  "internationalization",
+  "blabla"
+}
+中, 最长的单词集合为 ["internationalization"]
+
+在词典
+{
+  "like",
+  "love",
+  "hate",
+  "yes"
+}
+中，最长的单词集合为 ["like", "love", "hate"]
+
+思路分析：
+其实如果这个题目采用两次遍历数组的话，就没有什么挑战性，很容易就能解的。
+是否能够一次遍历就能够解决这个问题呢？
+我想是可以的。
+我所采取的手段是借用栈这个数据结构。栈有着先入后出的特点。
+字符串是否放入栈中，我所采用的标准是，判断此字符串是否比当前栈中最长的字符串长度要长，如果是则更新这个最长值，并将此字符串放入栈中；
+如果是等于，也放入栈中，但是长度不更新；如果是小于则不放入栈中。
+根据这个策略进行一次循环之后，很容易就可以看出，此时的栈中最上面的字符串必然是原数组中字符串最长的字符串或者是之一。
+因此取出最长的这些字符串就可以得到答案。
+
+
+代码
+class Solution {
+public:
+    /**
+     * @param dictionary: a vector of strings
+     * @return: a vector of strings
+     */
+    vector<string> longestWords(vector<string> &dictionary) {
+        vector<string> result; 
+        if (dictionary.empty())  
+        {  
+            return result;              //result初始化为空
+        }  
+        
+        stack<string> strStack;  
+        int maxLen = 0;     //定义1个最大长度的字符串长度用来保存最大的字符串
+        
+        for (int i = 0; i < dictionary.size(); i++)  
+        {  
+            if (dictionary[i].size() >= maxLen)  
+            {  
+                strStack.push(dictionary[i]);  
+                maxLen = dictionary[i].size();  //更新maxlen的值大小
+            }  
+        }  
+        while (!strStack.empty())  
+        {  
+            if (strStack.top().size() == maxLen)  
+            {  
+                result.push_back(strStack.top());  
+                strStack.pop();  
+            } else  
+            {  
+                break;  
+            }  
+        }  
+        return result;  
+    }
+};
