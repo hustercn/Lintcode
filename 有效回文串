@@ -1,0 +1,43 @@
+给定一个字符串，判断其是否为一个回文串。只包含字母和数字，忽略大小写。
+"A man, a plan, a canal: Panama" 是一个回文。
+"race a car" 不是一个回文。
+代码
+class Solution {
+public:
+    /**
+     * @param s A string
+     * @return Whether the string is a valid palindrome
+     */
+    bool isPalindrome(string& s) 
+    {
+       if(s.empty()) return true;
+       if(s.size()==1) return true;
+       
+       
+       int size=s.size();
+       int begin=0;
+       int end=size-1;
+       
+       while(begin<end)
+       {
+           while(end>0&&check(s[end]))
+                --end;
+           while(begin<size&&check(s[begin]))
+                ++begin;
+           if(tolower(s[begin])!=tolower(s[end]))
+                return false;
+            else
+                ++begin;
+                --end;
+       }
+       return true;
+    }
+    
+     bool check(char ch)
+     {
+           if((ch>'a'&&ch<'z')||(ch>'A'&&ch<'Z')||(ch>'0'&&ch<'9'))
+               return true;
+           return false;
+     }
+    
+};
