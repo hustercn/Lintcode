@@ -1,0 +1,71 @@
+比较两个字符串A和B，确定A中是否包含B中所有的字符。字符串A和B中的字符都是大写字母
+
+
+样例
+给出 A = "ABCD" B = "ACD"，返回 true
+给出 A = "ABCD" B = "AABC"， 返回 false
+
+
+代码
+class Solution {
+public:
+    /**
+     * @param A: A string includes Upper Case letters
+     * @param B: A string includes Upper Case letter
+     * @return:  if string A contains all of the characters in B return true 
+     *           else return false
+     */
+     
+    //思路：统计两边的信息进行比较。如果B中的每种字符的个数小于等于A中的，则A包含B。
+    bool compareStrings(string A, string B) {
+        
+        int Achar[26];//储存字符串的每个字母个数
+        int Bchar[26];
+        
+        for (int i = 0; i<26; i++) 
+        {
+             Achar[i] = 0;     //同时对两个数组进行初始化置0操作
+             Bchar[i] = 0;
+        }
+        
+        int countA = A.length();
+        int countB = B.length();
+        
+        for (int i = 0; i<countA; i++) 
+        {
+            int index;
+            index = A[i] - 65;        //65为大写A的ASCⅡ码值
+            Achar[index]++;
+        }
+        
+        
+        
+        for (int i = 0; i<countB; i++)
+        {
+             int index;
+             index = B[i] - 65;         //65为大写A的ASCⅡ码值
+             Bchar[index]++;
+        }
+        
+        
+        for (int i = 0; i<26; i++) 
+        {
+            if (Achar[i]<Bchar[i])
+                return false;
+        }
+            return true;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
