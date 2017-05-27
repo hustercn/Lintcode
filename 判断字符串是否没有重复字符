@@ -1,0 +1,21 @@
+class Solution {
+public:
+    /**
+     * @param str: a string
+     * @return: a boolean
+     */
+    bool isUnique(string &str) 
+    {
+        int len=str.size();
+        int  i,j;
+        for(i=0;i<len-1;++i)
+        {
+            for(j=i+1;j<len;++j)
+            {
+                if(str[i]==str[j])
+                    return 0;
+            }
+        }
+     return 1;
+    }
+};
