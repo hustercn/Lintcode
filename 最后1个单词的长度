@@ -1,0 +1,24 @@
+给定一个字符串， 包含大小写字母、空格' '，请返回其最后一个单词的长度。
+如果不存在最后一个单词，请返回0。
+样例给定 s = "Hello World"，返回5。
+
+代码
+class Solution {
+public:
+    /**
+     * @param s A string
+     * @return the length of last word
+     */
+    int lengthOfLastWord(string& s) {
+       int len=s.size();    
+       if(len=0)
+            return 0;//根据题目要求：如果不存在最后一个单词，请返回0 
+        int i=len-1;
+        int j=len-1;
+       
+        while(s[i]!=' '&&i>=0)     //从后往前数数，找到第1个为空格的字符，还要注意空格是单个字符，不是字符串，用' '表示而不是" "表示
+            i--;                   //找到空格
+        return j-i;                //双指针表示
+            
+    }
+};
