@@ -1,0 +1,39 @@
+给定一个字符串，请找出其中无重复字符的最长子字符串。
+样例例如，在"abcabcbb"中，其无重复字符的最长子字符串是"abc"，其长度为 3。
+对于，"bbbbb"，其无重复字符的最长子字符串为"b"，长度为1。
+
+class Solution {
+public:
+	/**
+	* @param s: a string
+	* @return: an integer
+	*/
+	int lengthOfLongestSubstring(string s) {
+		int num= 0;
+		map<char, int> m;
+		int start = 1;
+		for (int i = 1; i <= s.length(); i++)
+		{
+			char c = s[i - 1];
+			if (m[c] >= start)    //前一个字母的出现次数
+			{
+				start = m[c] + 1;
+				m[c] = i;
+
+			}
+			else
+			{
+				m[c] = i;
+				num = max(num, i - start + 1);
+			}
+
+		}
+		return num;
+	}
+};
+
+/*
+时间复杂度：O(n) 时间
+分析：遍历该字符串，每遍历一个字母时，利用map去找该字母最近一次出现是什么时候，
+中间这一段便是无重复字符的字符串。
+*/
