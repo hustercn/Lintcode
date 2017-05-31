@@ -1,0 +1,62 @@
+给出一个字符串（假设长度最长为1000），求出它的最长回文子串，你可以假定只有一个满足条件的最长回文串。
+样例给出字符串 "abcdzdcab"，它的最长回文子串为 "cdzdc"。
+
+
+/*思路：
+中心扩展法：中心扩展就是把给定的字符串的每一个字母当做中心，向两边扩展，这样来找最长的子回文串。
+算法复杂度为O(N^2)。
+但是要考虑两种情况：
+1、像aba，这样长度为奇数。
+2、想abba，这样长度为偶数。
+*/
+
+
+代码：
+class Solution {
+public:
+    /**
+     * @param s input string
+     * @return the longest palindromic substring
+     */
+    string longestPalindrome(string& s) {
+    const int length=s.size(); //字符串长度  
+    int maxlength=0;  //最长回文字符串长度  
+    int start=0;  //最长回文字符串起始地址 
+    if(length%2==1){
+         for(int i=0;i<length;i++)//长度为奇数  
+         {  
+            int j=i-1,k=i+1;  
+            while(j>=0&&k<length&&s[j]==s[k])  
+            {  
+               if(k-j+1>maxlength)  
+               {  
+                  maxlength=k-j+1;  
+                  start=j;  
+               }  
+                j--;  
+                k++;  
+            }  
+         }  
+     }
+  
+   else{
+       for(int i=0;i<length;i++)//长度为偶数  
+       {  
+           int j=i,k=i+1;  
+           while(j>=0&&k<length&&s[j]==s[k])  
+           {  
+              if(k-j+1>maxlength)  
+              {  
+                  maxlength=k-j+1;  
+                  start=j;  
+              }  
+              j--;  
+              k++;  
+            }  
+        }
+    }
+    if(maxlength>0)  
+        return s.substr(start,maxlength);  
+    return NULL;  
+    }
+};
