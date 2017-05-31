@@ -1,0 +1,50 @@
+实现atoi这个函数，将一个字符串转换为整数。如果没有合法的整数，返回0。
+如果整数超出了32位整数的范围，返回INT_MAX(2147483647)如果是正整数，或者INT_MIN(-2147483648)如果是负整数。
+样例
+"10" =>10
+"-1" => -1
+"123123123123123" => 2147483647
+"1.0" => 1
+
+
+代码
+class Solution {
+public:
+    /**
+     * @param str: A string
+     * @return An integer
+     */
+    int atoi(string str) {
+        // write your code here
+
+        int index=0;       
+        bool flag = true;
+        int result = 0;
+        
+        
+      
+        if (str[0] =='-') 
+            flag = false;//判断第一位的符号位是正号还是符号
+        
+        if(str[0] =='-')  //判读第1位是符号位还是数字位,为下面的循环做准备
+            index=1;
+        else index=0;
+        
+    
+        
+        for (int i = index; i != str.size(); ++i) //index是第0位还是第1位，根据是否有符号位来判断 
+        {
+            if (!(str[i] >= '0' && str[i] <= '9')) return 0;
+            
+            result = result * 10 + str[i] - '0';
+        }
+        
+        if(result>=INT_MAX) return 2147483647;
+        else if(result<=INT_MIN) 
+            return -2147483647;
+        else 
+            return flag ? result : -result;         //也可以用if-else语句替换
+        
+    }
+    
+};
