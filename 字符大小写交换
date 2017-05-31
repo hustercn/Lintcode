@@ -1,0 +1,40 @@
+给定一个只包含字母的字符串，按照先小写字母后大写字母的顺序进行排序。
+
+样例给出"abAcD"，一个可能的答案为"acbAD"
+
+/思路：先找到第一个大写字符出现的位置，用while循环和start++配合；当不满足条件的时候跳出循环
+再找到第1个小写字母位置，用while循环和end--配合；当不满足条件的时候跳出循环
+/
+
+代码：
+class Solution {
+public:
+    /** 
+     * @param chars: The letters array you should sort.
+     */
+    void sortLetters(string &letters) {
+        // write your code here
+         int start = 0;
+         int end = letters.size()-1;  
+         while(start<end)
+         {  
+              while(start<end&&letters[start]>='a')    //找到第1个大写字母
+              {  
+                   start++;  
+              }  
+              while(end>=0&&letters[end]<'a')          //找到第1个小写字母
+              {  
+                   end--;  
+              }  
+              if(start<end)
+              {  
+                   //交换  
+                   char tmp= letters[start];  
+                   letters[start] = letters[end];  
+                   letters[end] = tmp;  
+                   start++;  
+                   end--;  
+              }  
+         }  
+    }
+};
