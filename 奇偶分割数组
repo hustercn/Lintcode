@@ -1,0 +1,31 @@
+分割一个整数数组，使得奇数在前偶数在后
+
+样例：给定 [1, 2, 3, 4]，返回 [1, 3, 2, 4]。：
+思路
+// 不能学排序算法学傻了吧，这题不至于上各种排序算法吧还
+/*新建一个数组先把原数组中的奇数push进去再把偶数push进去，
+然后用新数组数据覆盖原数组即可复杂度O(n)*/
+
+
+代码
+class Solution {
+public:
+    /**
+     * @param nums: a vector of integers
+     * @return: nothing
+     */
+    void partitionArray(vector<int> &nums) {
+        vector<int>  res;                  //用新的数组来保存排序后的数据
+		for(int i = 0; i < nums.size(); i++)
+		{
+			if(nums[i] % 2 == 1)
+			res.push_back(nums[i]);
+		}
+		for(int i = 0; i < nums.size(); i++)
+		{
+			if(nums[i] % 2 == 0)
+			res.push_back(nums[i]);
+		}
+		nums=res;                   //用新的数组来替换原来的数组
+    }
+};
