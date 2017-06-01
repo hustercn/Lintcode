@@ -1,0 +1,68 @@
+给定一个链表，删除链表中倒数第n个节点，返回链表的头节点。
+
+注意事项
+链表中的节点个数大于等于n
+
+
+样例
+给出链表1->2->3->4->5->null和 n = 2.
+删除倒数第二个节点之后，这个链表将变成1->2->3->5->null.
+
+
+//双指针：first和second
+//两个指针都指向头结点
+//first指针先跑，并且记录节点数，当first指针跑了k-1个节点后，second指针开始跑，
+//当first指针跑到最后时，second所指指针就是倒数第k个节点
+
+
+/**
+ * Definition of ListNode
+ * class ListNode {
+ * public:
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int val) {
+ *         this->val = val;
+ *         this->next = NULL;
+ *     }
+ * }
+ */
+class Solution {
+public:
+    /**
+     * @param head: The first node of linked list.
+     * @param n: An integer.
+     * @return: The head of linked list.
+     */
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
+        ListNode *p1, *p2, *pre;  
+        if ( head == NULL || n <= 0 ) 
+        {  
+            return NULL;  
+        }  
+        p1 = head;       //p1是先走指针 
+        p2 = head;       //p2是后走指针
+        for ( int i = 0; i < n-1; i++ ) 
+        {  
+            if ( p1 -> next != NULL ) 
+            {  
+                p1 = p1 -> next;  
+            } else {  
+                return NULL;  
+            }  
+        }  
+        while ( p1 -> next != NULL ) 
+        {  
+            p1 = p1 -> next;  
+            pre = p2;        //关键一步：标记倒数第n个节点的前一个节点  
+            p2 = p2 ->next;  
+        }  
+        if ( p2 == head )  //关键判断：如果只有一个节点，倒数第n个就是第一个，删除后链表为空 
+        {  
+            head = head -> next;  
+        } else {  
+        pre ->next = pre -> next -> next;  
+        }  
+        return head;  
+    }
+};
