@@ -1,0 +1,53 @@
+计算两个数组的交
+注意事项
+每个元素出现次数得和在数组里一样
+答案可以以任意顺序给出
+
+
+样例：nums1 = [1, 2, 2, 1], nums2 = [2, 2], 返回 [2, 2].
+
+
+思路：
+/*
+这种方法先给两个数组排序，然后用两个指针分别指向两个数组的起始位置，
+如果两个指针指的数字相等，则存入结果中，两个指针均自增1，
+如果第一个指针指的数字大，则第二个指针自增1，
+反之亦然，参见代码如下：
+*/
+
+代码
+class Solution {
+public:
+    /**
+     * @param nums1 an integer array
+     * @param nums2 an integer array
+     * @return an integer array
+     */
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> res;
+        int i = 0, j = 0;
+        sort(nums1.begin(), nums1.end());      //先要排序，方便后面的两个指针比较大小
+        sort(nums2.begin(), nums2.end());
+        while (i < nums1.size() && j < nums2.size()) 
+        {
+            if (nums1[i] == nums2[j]) 
+            {
+                res.push_back(nums1[i]);
+                ++i; ++j;
+            } else if (nums1[i] > nums2[j]) 
+            {
+                ++j;
+            } else 
+            {
+                ++i;
+            }
+        }
+        return res;
+    }
+};
+
+
+
+
+
+
