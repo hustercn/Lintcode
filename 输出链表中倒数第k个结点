@@ -1,0 +1,33 @@
+输入一个链表，输出该链表中倒数第k个结点。
+输入一个链表，输出该链表中倒数第k个结点。
+注意：
+//两个指针都指向头结点
+//pHead指针先跑，并且记录节点数，当pHead指针跑了k-1个节点后，pTail指针开始跑，
+//当pHead指针跑到最后时，pTail所指指针就是倒数第k个节点
+
+
+代码
+class Solution {
+public:    
+	ListNode* FindKthToTail(ListNode* Head, unsigned int k) 
+	{        
+		if(Head==NULL||k==0)   return NULL;        
+		
+		ListNode* first=Head;  
+	  ListNode* second=Head;
+	  
+		for(int i=0;i<k-1;++i)       
+		{            
+			if(first->next!=NULL)                
+			first=first->next;            
+			else               
+			return NULL;        
+		}        
+		while(first->next!=NULL)       
+		{            
+			  first=first->next;           
+		    second=second->next;        
+		}        
+		return second;   
+	 }
+};
