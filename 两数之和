@@ -1,0 +1,51 @@
+给一个整数数组，找到两个数使得他们的和等于一个给定的数 target。
+你需要实现的函数twoSum需要返回这两个数的下标, 并且第一个下标小于第二个下标。注意这里下标的范围是 1 到 n，不是以 0 开头。
+
+样例
+给出 numbers = [2, 7, 11, 15], target = 9, 返回 [1, 2].
+
+思路：
+  数列满足递增，设两个头尾两个指针i和j， 
+  若ai + aj == sum，就是答案（相差越远乘积越小） 
+  若ai + aj > sum，aj肯定不是答案之一（前面已得出 i 前面的数已是不可能），j -= 1 
+  若ai + aj < sum，ai肯定不是答案之一（前面已得出 j 后面的数已是不可能），i += 1 
+  时间复杂度O(n)
+//开始还在纠结乘积最小，后来转念一想，a+b=sum,a和b越远乘积越小，
+//而一头一尾两个指针往内靠近的方法找到的就是乘积最小的情况。
+//如果是乘积最大的情况就是一直找到两个指针重合，每次找到一个就将之前返回的
+
+
+代码
+class Solution {
+public:
+    /*
+     * @param numbers : An array of Integer
+     * @param target : target = numbers[index1] + numbers[index2]
+     * @return : [index1+1, index2+1] (index1 < index2)
+     */
+    vector<int> twoSum(vector<int> &nums, int target) {
+        vector<int> result;
+		int length = nums.size();
+		int start = 0;
+		int end = length - 1;
+		while (start < end)
+		{
+			if (nums[start] + nums[end] == target)
+			{
+				result.push_back(nums[start]);
+				result.push_back(nums[end]);
+				break;
+			}
+			 else if (nums[start] +nums[end] < target)
+			 start++;
+			 else
+			 end--;
+		} 
+	  return result;
+    }
+};
+
+
+
+
+
