@@ -1,0 +1,45 @@
+给定一个排序数组，在原数组中删除重复出现的数字，使得每个元素只出现一次，并且返回新的数组的长度。
+不要使用额外的数组空间，必须在原地没有额外空间的条件下完成。
+
+样例：给出数组A =[1,1,2]，你的函数应该返回长度2，此时A=[1,2]。
+
+思路：
+//我们只需对对组遍历一次，并设置一个计数器，每当遍历前后元素不相同，计数器加1，
+//并将计数器对应在数组中位置定位到当前遍历的元素。
+
+代码：
+class Solution {
+public:
+    /**
+     * @param A: a list of integers
+     * @return : return an integer
+     */
+    int removeDuplicates(vector<int> &nums) {
+        int len = nums.size();
+        if (len == 0)
+            return 0;
+        int count = 1;                      //count也从1开始计数
+        for (int i = 1; i < len; i++)       //i也从1开始计数
+        {
+            if (nums[i] == nums[i - 1])     //前后比较
+            {
+                continue;
+            }else{
+                nums[count] = nums[i];
+                count++;
+            }
+        }
+        return count;
+        }
+};
+
+
+
+
+
+
+
+
+
+
+
