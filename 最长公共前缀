@@ -1,0 +1,33 @@
+给k个字符串，求出他们的最长公共前缀(LCP)
+样例
+在 "ABCD" "ABEF" 和 "ACEF" 中,  LCP 为 "A"
+在 "ABCDEFG", "ABCEFG", "ABCEFA" 中, LCP 为 "ABC"
+
+
+/*思路:
+纵向扫描：从下标0开始，判断每一个字符串的下标0，判断是否全部相同。
+直到遇到不全部相同的下标。时间性能为O(n*m)。
+*/
+
+代码：
+class Solution {
+public:    
+    /**
+     * @param strs: A list of strings
+     * @return: The longest common prefix
+     */
+    string longestCommonPrefix(vector<string> &strs) {
+       if(strs.empty())  
+            return "";  
+        int len = strs[0].size();  
+        int num = strs.size(); 
+        
+        for(int i=0;i<len;i++)                  //strs[0]
+            for(int j=1;j<num;j++)  
+            {  
+                if(i > strs[j].size() || strs[j][i] != strs[0][i])  
+                    return strs[0].substr(0, i);  
+            }  
+        return strs[0];  
+    }
+};
